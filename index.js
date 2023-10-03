@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import redis from "redis";
 
+import authRoutes from "./routes/auth.js";
 
 // Configuration
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -31,6 +32,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use(cookieParser());
 
 /* ROUTES */
+app.use("/api/auth", authRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 5001;
