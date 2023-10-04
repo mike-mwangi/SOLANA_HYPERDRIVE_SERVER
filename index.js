@@ -10,7 +10,10 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import redis from "redis";
+import { verifyToken } from "./middlewares/auth.js";
 
+// imports
+import userRoutes from "./routes/user.js";
 import authRoutes from "./routes/auth.js";
 
 // Configuration
@@ -33,6 +36,7 @@ app.use(cookieParser());
 
 /* ROUTES */
 app.use("/api/auth", authRoutes);
+app.use("/api/users", verifyToken, userRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 5001;
@@ -50,7 +54,7 @@ mongoose
 const client = redis.createClient(process.env.REDIS_URL);
 
 client.on("connect", () => {
-    console.log("Connected to Redis");
+  console.log("Connected to Redis");
 });
 
 client.on("error", (err) => {
