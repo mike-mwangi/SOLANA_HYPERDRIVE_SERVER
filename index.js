@@ -15,6 +15,7 @@ import { verifyToken } from "./middlewares/auth.js";
 // imports
 import userRoutes from "./routes/user.js";
 import authRoutes from "./routes/auth.js";
+import registryRoutes from "./routes/registry.js";
 
 // Configuration
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -37,6 +38,7 @@ app.use(cookieParser());
 /* ROUTES */
 app.use("/api/auth", authRoutes);
 app.use("/api/users", verifyToken, userRoutes);
+app.use("/registry", verifyToken, registryRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 5001;
