@@ -36,8 +36,8 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use(cookieParser());
 
 /* ROUTES */
-app.use("/api/auth", authRoutes);
-app.use("/api/users", verifyToken, userRoutes);
+app.use("/auth", authRoutes);
+app.use("/users", verifyToken, userRoutes);
 app.use("/registry", verifyToken, registryRoutes);
 
 /* MONGOOSE SETUP */

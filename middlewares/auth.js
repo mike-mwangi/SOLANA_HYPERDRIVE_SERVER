@@ -14,7 +14,7 @@ export const verifyToken = async (req, res, next) => {
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
     // add user id field to request body object
-    req.UserId = verified.id;
+    req.userId = verified.id;
     req.UserRole = verified.role;
     next();
   } catch (err) {

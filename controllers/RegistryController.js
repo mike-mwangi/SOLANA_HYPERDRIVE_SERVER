@@ -1,5 +1,6 @@
-import { deleteAllDocumentFiles, uploadFilesToS3 } from "../Services/Storage.js";
+import { deleteAllDocumentFiles, uploadFilesToS3, uploadOrReplaceFilesOnS3 } from "../Services/Storage.js";
 import Registry from "../models/Registry.js";
+import mongoose from "mongoose";
 
 export const create = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ export const create = async (req, res) => {
       _id: id,
       ...req.body,
       ...files,
-      owner: req.user._id,
+      owner: req.userId,
     });
     const savedRegistry = await registry.save();
     res.status(201).json({
@@ -88,9 +89,7 @@ export const submit = async (req, res) => {
 
 export const getRegistry = async (req, res) => {
   try {
-    const registry = await Registry.findById(req.params.id)
-      .populate("userInfo")
-      .populate("carbonAsset");
+    const registry = await Registry.findById(req.params.id);
     if (!registry) {
       return res
         .status(400)
