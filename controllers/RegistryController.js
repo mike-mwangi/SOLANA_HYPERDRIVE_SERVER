@@ -1,6 +1,7 @@
 import { deleteAllDocumentFiles, uploadFilesToS3, uploadOrReplaceFilesOnS3 } from "../Services/Storage.js";
-import Registry from "../models/Registry.js";
+import Registry from "../models/RegistryProfile.js";
 import mongoose from "mongoose";
+import User from "../models/User.js";
 
 export const create = async (req, res) => {
   try {
@@ -13,6 +14,9 @@ export const create = async (req, res) => {
       owner: req.userId,
     });
     const savedRegistry = await registry.save();
+    const user = await User.findByIdAndUpdate(req.userId, {
+      profile: savedRegistry._id,
+    });
     res.status(201).json({
       success: true,
       message: "Registry created successfully",

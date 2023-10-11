@@ -4,7 +4,7 @@ import S3ObjectSchema from "./S3ObjectSchema.js";
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
-  owner: {
+  registry: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },

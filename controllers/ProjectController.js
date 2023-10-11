@@ -14,7 +14,7 @@ export const create = async (req, res) => {
       _id: id,
       ...req.body,
       ...files,
-      owner: req.userId,
+      registry: req.userId,
     });
     const savedProject = await project.save();
     res.status(201).json({
