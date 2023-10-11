@@ -37,10 +37,10 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use(cookieParser());
 
 /* ROUTES */
+app.use("/project", projectRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", verifyToken, userRoutes);
 app.use("/registry", verifyToken, registryRoutes);
-app.use("/project", verifyToken, projectRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 5001;
