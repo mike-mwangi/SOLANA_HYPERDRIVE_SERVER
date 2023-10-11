@@ -7,6 +7,7 @@ import {
   submit,
   update,
 } from "../controllers/ProjectController.js";
+import { createProjectOnchain } from "../utils/interact.js";
 import { uploads } from "../middlewares/file.js";
 
 const router = express.Router();
@@ -23,7 +24,7 @@ router
   .patch(verifyToken, uploads, update);
 router.patch("/submit/:id", verifyToken, submit);
 
-
+router.post('/create-project-onchain', createProjectOnchain);
 
 // router.put("/:userId", createProjectUploads, editProfile);
 
