@@ -26,6 +26,9 @@ const RegistrySchema = new Schema({
   certificateOfIncorporation: {
     type: S3ObjectSchema,
   },
+  logo: {
+    type: S3ObjectSchema,
+  },
   step: {
     type: Number,
     default: 1,

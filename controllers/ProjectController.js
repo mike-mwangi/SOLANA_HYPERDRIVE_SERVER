@@ -103,7 +103,6 @@ export const getProject = async (req, res) => {
       path: "registry",
       populate: {
         path: "profile",
-        model: "Profile", // Only required if Mongoose can't infer the model from the schema
       },
     });
     if (!project) {
@@ -129,7 +128,7 @@ export const getProjects = async (req, res) => {
       .populate({
         path: "registry",
         populate: {
-          path: "profile",
+          path: "profile"
         },
       })
       .lean();

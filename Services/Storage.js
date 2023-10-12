@@ -39,8 +39,8 @@ export async function deleteAllDocumentFiles(prefix) {
 export const uploadFilesToS3 = async (files, path = "") => {
   try {
     const s3 = getS3Client();
-    const PUBLIC_FIELDS = ["projectImages"];
-    const MULTIPLE_FILES_FIELDS = ["projectImages"];
+    const PUBLIC_FIELDS = ["images"];
+    const MULTIPLE_FILES_FIELDS = ["images"];
 
     if (!files) {
       return;

@@ -74,9 +74,6 @@ const ProjectSchema = new Schema({
     minlength: 50,
     maxlength: 1000,
   },
-  monitoringPlan: {
-    type: S3ObjectSchema,
-  },
 
   step: {
     type: Number,

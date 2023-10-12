@@ -18,6 +18,7 @@ export const inviteProjectDeveloper = async (data) => {
     profileModel: "DeveloperProfile",
     firstTime: true,
     password: hashedPass,
+    verified: true,
   });
 
   try {
