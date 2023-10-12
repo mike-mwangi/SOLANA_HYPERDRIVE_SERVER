@@ -56,7 +56,7 @@ const UserSchema = new mongoose.Schema(
     profileModel: {
       type: String,
       required: true,
-      enum: ['RegistryProfile', 'RestaurantProfile']
+      enum: ['RegistryProfile', 'DeveloperProfile']
     },
     passwordResetToken: String,
     passwordResetExpires: Date,

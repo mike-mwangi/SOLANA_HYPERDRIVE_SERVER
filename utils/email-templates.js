@@ -49,7 +49,6 @@ export const sendVerificationEmail = async (user, token) => {
   await sendEmail(user.email, subject, emailBody, emailHeaders);
 };
 
-
 export const sendAccountCreationEmail = async (user, password) => {
   const emailBody = `<!DOCTYPE html>
   <html lang="en">
@@ -173,3 +172,143 @@ export const sendForgotPasswordEmail = async (user, resetUrl) => {
   await sendEmail(user.email, subject, emailBody, emailHeaders);
 };
 
+export const sendProjectCreatedEmail = async (owner, registry, project) => {
+  const emailBody = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the ${process.env.APP_NAME}</title>
+    <style>
+      body { font-family: Arial, sans-serif; color: #000000; background-color: #333333; }
+      p { color: black; font-size: 14px}
+      .container { width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+      .header { background-color: #3869d4; padding: 20px; text-align: center; }
+      .content { padding: 20px; }
+      .button { 
+          border: 2px solid #3869d4; 
+          background-color: transparent;
+          color: #3869d4; 
+          display: inline-block; 
+          text-decoration: none; 
+          padding: 10px 22px; 
+          font-size: 16px; 
+          border-radius: 4px; 
+          text-align: center;
+      }
+      .footer { font-size: 12px; text-align: center; margin-top: 20px; }
+    </style>
+  </head>
+  <body style="background-color: #f5f5f5">
+    <div class="container">
+      <div class="header">
+        <h2 style="color: white; margin: 0;">${process.env.MAIL_FROM_NAME}</h2>
+      </div>
+      <div class="content">
+        <p>Dear ${owner.firstName},</p>
+        <p>We're excited to inform you that your project, ${
+          project.name
+        }, has been onboarded onto our platform by ${registry.name}.
+
+        <p>You can now review your project and access our services to help enhance your experience.</p>
+        <a href="${
+          process.env.LOGIN_URL
+        }" class="button" target="_blank">Login to Your Account</a>
+        <p>If the button above does not work, use the following link:</p>
+        <p><a href="${process.env.LOGIN_URL}" target="_blank">${
+    process.env.LOGIN_URL
+  }</a></p>
+        <p>If you need assistance or have any questions, please visit our support page or contact our support team at ${
+          process.env.MAIL_SUPPORT_ADDRESS
+        }.</p>
+        <p>We're thrilled to have you on board and look forward to seeing you in the ${
+          process.env.APP_NAME
+        } community!</p>
+        <p>Best Regards, <br>The ${process.env.APP_NAME} Team</p>
+      </div>
+      <div class="footer">
+        <p>&copy; ${new Date().getFullYear()} ${
+    process.env.APP_NAME
+  }. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+  </html>`;
+
+  const subject = `Welcome to the ${process.env.APP_NAME}.`;
+  const emailHeaders = {
+    "Content-Type": "text/html",
+    "Content-Disposition": "inline",
+  };
+  await sendEmail(owner.email, subject, emailBody, emailHeaders);
+};
+
+export const sendProjectOwnerInviteEmail = async (user, password) => {
+  const emailBody = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the ${process.env.APP_NAME}.</title>
+    <style>
+      body { font-family: Arial, sans-serif; color: #000000; background-color: #333333; }
+      p { color: black; font-size: 14px}
+      .container { width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+      .header { background-color: #3869d4; padding: 20px; text-align: center; }
+      .content { padding: 20px; }
+      .button { 
+          border: 2px solid #3869d4; 
+          background-color: transparent;
+          color: #3869d4; 
+          display: inline-block; 
+          text-decoration: none; 
+          padding: 10px 22px; 
+          font-size: 16px; 
+          border-radius: 4px; 
+          text-align: center;
+      }
+      .footer { font-size: 12px; text-align: center; margin-top: 20px; }
+    </style>
+  </head>
+  <body style="background-color: #f5f5f5">
+    <div class="container">
+      <div class="header">
+        <h2 style="color: white; margin: 0;">${process.env.MAIL_FROM_NAME}</h2>
+      </div>
+      <div class="content">
+        <p>Dear ${user.firstName},</p>
+        <p>Congrats! Your project has been added to ${
+          process.env.APP_NAME
+        }. Login to your account with the link below and use the provided credentials.</p>
+        <a href="${
+          process.env.FRONTEND_BASE_URL
+        }" class="button" target="_blank">Login to Your Account</a>
+        <p>If the button above does not work, use the following link:</p>
+        <p><a href="${process.env.LOGIN_URL}" target="_blank">${
+    process.env.LOGIN_URL
+  }</a></p>
+        <p><strong>Email: </strong>${user.email}</p>
+        <p><strong>Password: </strong>${password}</p>
+
+        <p>If you need assistance or have any questions, please visit our support page or contact our support team at ${
+          process.env.MAIL_SUPPORT_ADDRESS
+        }.</p>
+        <p>We're thrilled to have your project on board and look forward to a successful collaboration!</p>
+        <p>Best Regards, <br>The ${process.env.APP_NAME} Team</p>
+      </div>
+    </div>
+    <div class="footer">
+    <p>&copy; ${new Date().getFullYear()} ${
+    process.env.APP_NAME
+  }. All rights reserved.</p>
+  </div>
+  </body>
+  </html>`;
+
+  const subject = `Welcome to the ${process.env.APP_NAME} Onboarding Process`;
+  const emailHeaders = {
+    "Content-Type": "text/html",
+    "Content-Disposition": "inline",
+  };
+  await sendEmail(user.email, subject, emailBody, emailHeaders);
+};

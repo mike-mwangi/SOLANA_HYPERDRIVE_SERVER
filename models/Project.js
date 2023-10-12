@@ -18,8 +18,6 @@ const ProjectSchema = new Schema({
   },
   description: {
     type: String,
-
-    minlength: 100,
     maxlength: 2000,
   },
   location: {
@@ -43,9 +41,14 @@ const ProjectSchema = new Schema({
     type: Date,
   },
   developer: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  developerFirstName: {
     type: String,
-
-    maxlength: 100,
+  },
+  developerLastName: {
+    type: String,
   },
   email: {
     type: String,
@@ -81,7 +84,7 @@ const ProjectSchema = new Schema({
   },
   stage: {
     type: String,
-    default: "Draft",
+    default: "draft",
   },
   status: {
     type: String,
