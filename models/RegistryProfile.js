@@ -26,15 +26,18 @@ const RegistrySchema = new Schema({
   certificateOfIncorporation: {
     type: S3ObjectSchema,
   },
+  logo: {
+    type: S3ObjectSchema,
+  },
   step: {
     type: Number,
     default: 1,
   },
-  status: {
+  stage: {
     type: String,
     default: "draft",
   },
 });
 
-const Registry = mongoose.model("Registry", RegistrySchema);
+const Registry = mongoose.model("RegistryProfile", RegistrySchema);
 export default Registry;

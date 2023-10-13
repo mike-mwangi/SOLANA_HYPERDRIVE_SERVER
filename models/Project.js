@@ -4,7 +4,7 @@ import S3ObjectSchema from "./S3ObjectSchema.js";
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
-  owner: {
+  registry: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
@@ -18,8 +18,6 @@ const ProjectSchema = new Schema({
   },
   description: {
     type: String,
-
-    minlength: 100,
     maxlength: 2000,
   },
   location: {
@@ -43,9 +41,14 @@ const ProjectSchema = new Schema({
     type: Date,
   },
   developer: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  developerFirstName: {
     type: String,
-
-    maxlength: 100,
+  },
+  developerLastName: {
+    type: String,
   },
   email: {
     type: String,
@@ -71,9 +74,6 @@ const ProjectSchema = new Schema({
     minlength: 50,
     maxlength: 1000,
   },
-  monitoringPlan: {
-    type: S3ObjectSchema,
-  },
 
   step: {
     type: Number,
@@ -81,7 +81,7 @@ const ProjectSchema = new Schema({
   },
   stage: {
     type: String,
-    default: "Draft",
+    default: "draft",
   },
   status: {
     type: String,

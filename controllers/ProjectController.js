@@ -5,6 +5,7 @@ import {
 } from "../Services/Storage.js";
 import Project from "../models/Project.js";
 import mongoose from "mongoose";
+import { inviteProjectDeveloper } from "../utils/inviteUser.js";
 
 export const create = async (req, res) => {
   try {
@@ -14,7 +15,7 @@ export const create = async (req, res) => {
       _id: id,
       ...req.body,
       ...files,
-      owner: req.userId,
+      registry: req.userId,
     });
     const savedProject = await project.save();
     res.status(201).json({
@@ -44,6 +45,10 @@ export const update = async (req, res) => {
     let updates = req.body;
     let files = {};
     const step = updates.step;
+
+    if (step == 4) {
+      updates.developer = await inviteProjectDeveloper(updates);
+    }
 
     files = await uploadOrReplaceFilesOnS3(project, req.files, project._id);
     updates = { ...updates, ...files };
@@ -76,7 +81,8 @@ export const submit = async (req, res) => {
         .json({ success: false, message: "Project does not exist", data: {} });
     }
 
-    project.projectStatus = "Pending Approval";
+    project.status = "Pending Approval";
+    project.stage = "submitted";
     project.step = project.step + 1;
     await project.save();
     return res.status(200).json({
@@ -93,7 +99,12 @@ export const submit = async (req, res) => {
 
 export const getProject = async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id);
+    const project = await Project.findById(req.params.id).populate({
+      path: "registry",
+      populate: {
+        path: "profile",
+      },
+    });
     if (!project) {
       return res
         .status(400)
@@ -113,7 +124,14 @@ export const getProject = async (req, res) => {
 
 export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find();
+    const projects = await Project.find()
+      .populate({
+        path: "registry",
+        populate: {
+          path: "profile"
+        },
+      })
+      .lean();
     return res.status(200).json({
       success: true,
       message: "Registries fetched successfully",

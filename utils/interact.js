@@ -7,7 +7,6 @@ dotenv.config();
 const connection = new solanaWeb3.Connection(
   solanaWeb3.clusterApiUrl("devnet")
 );
-console.log("Cojnbkhsdvys", connection);
 const programId = new solanaWeb3.PublicKey(
   "BfE5siVdPnnezakBy37mvVABQfSCNZyoijLZFmxzjoDu"
 );

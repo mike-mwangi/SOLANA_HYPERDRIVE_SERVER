@@ -12,6 +12,15 @@ import PasswordHistory from "../models/PasswordHistory.js";
 
 /* REGISTER USER */
 const SALT_ROUNDS = 10;
+function getProfileModel(role) {
+  switch (role) {
+    case "registry":
+      return "RegistryProfile";
+    default:
+      return "";
+  }
+}
+
 export const register = async (req, res) => {
   try {
     const { firstName, lastName, email, phoneNumber, role, password, country } =
@@ -38,6 +47,7 @@ export const register = async (req, res) => {
       role,
       country,
       password: passwordHash,
+      profileModel: getProfileModel(role),
     });
     const savedUser = await newUser.save();
 

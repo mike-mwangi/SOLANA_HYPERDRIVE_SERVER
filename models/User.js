@@ -49,6 +49,15 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      refPath: 'profileModel'
+    },
+    profileModel: {
+      type: String,
+      required: true,
+      enum: ['RegistryProfile', 'DeveloperProfile']
+    },
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
