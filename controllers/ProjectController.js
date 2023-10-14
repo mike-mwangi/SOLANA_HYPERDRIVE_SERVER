@@ -124,7 +124,7 @@ export const getProject = async (req, res) => {
 
 export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find()
+    const projects = await Project.find({ registry: req.userId })
       .populate({
         path: "registry",
         populate: {
