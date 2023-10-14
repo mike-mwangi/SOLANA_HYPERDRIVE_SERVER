@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
   cors({
     origin: process.env.FRONTEND_BASE_URL || "http://localhost:3000",
-    credentials: true,
+    methods: ["GET", "POST", "PUT"],
   })
 );
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));

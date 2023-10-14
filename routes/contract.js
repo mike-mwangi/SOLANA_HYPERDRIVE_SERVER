@@ -14,7 +14,6 @@ import { uploads } from "../middlewares/file.js";
 const router = express.Router();
 
 /* READ */
-router.get("/public", getPublicProjects);
 router
   .route("/")
   .get(verifyToken, getProjects)
@@ -25,6 +24,7 @@ router
   .get(verifyToken, getProject)
   .patch(verifyToken, uploads, update);
 router.patch("/submit/:id", verifyToken, submit);
+router.route("/public").get(getPublicProjects);
 
 router.post("/create-project-onchain", createProjectOnchain);
 

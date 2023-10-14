@@ -124,11 +124,33 @@ export const getProject = async (req, res) => {
 
 export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find()
+    const projects = await Project.find({ registry: req.userId })
       .populate({
         path: "registry",
         populate: {
-          path: "profile"
+          path: "profile",
+        },
+      })
+      .lean();
+    return res.status(200).json({
+      success: true,
+      message: "Registries fetched successfully",
+      data: projects,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message, data: {} });
+  }
+};
+
+export const getPublicProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({ stage: "submitted" })
+      .populate({
+        path: "registry",
+        populate: {
+          path: "profile",
         },
       })
       .lean();
