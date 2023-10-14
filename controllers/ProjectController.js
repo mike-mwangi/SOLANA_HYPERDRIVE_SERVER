@@ -128,7 +128,29 @@ export const getProjects = async (req, res) => {
       .populate({
         path: "registry",
         populate: {
-          path: "profile"
+          path: "profile",
+        },
+      })
+      .lean();
+    return res.status(200).json({
+      success: true,
+      message: "Registries fetched successfully",
+      data: projects,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message, data: {} });
+  }
+};
+
+export const getPublicProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({ stage: "submitted" })
+      .populate({
+        path: "registry",
+        populate: {
+          path: "profile",
         },
       })
       .lean();
