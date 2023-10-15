@@ -22,26 +22,26 @@ export const sendVerificationEmail = async (user, token) => {
   <body style="background-color: #f5f5f5">
     <div class="container">
       <div class="header">
-        <h2 style="color: white; margin: 0;">X</h2>
+        <h2 style="color: white; margin: 0;">Carbon Markets Ledger</h2>
       </div>
       <div class="content" style="background-color: #ffffff">
         <p>Hello ${user.firstName},</p>
-        <p>Welcome to X! We are excited to have you on board. To ensure a smooth experience and to fully access your account, kindly verify your email address by clicking the button below:</p>
+        <p>Welcome to Carbon Markets Ledger! We are excited to have you on board. To ensure a smooth experience and to fully access your account, kindly verify your email address by clicking the button below:</p>
         <p><a href="${verificationLink}" class="button" target="_blank" style="color: white">Verify My Email Address</a></p>
         <p>If the button above does not work, please copy and paste the following link into your browser:</p>
         <p><a href="${verificationLink}" target="_blank">${verificationLink}</a></p>
-        <p>Once your email address is verified, you will be all set to explore and enjoy the features of X. If you have any questions or need assistance, feel free to reach out to our support team at <a href="mailto:info@jahmike.sol">info@jahmike.sol</a>. Alternatively, you can visit our website at <a href="https://www.example.com" target="_blank">www.example.com</a> and chat with our helpful chatbot.</p>
-        <p>Thank you for choosing X!</p>
-        <p>The X Team.</p>
+        <p>Once your email address is verified, you will be all set to explore and enjoy the features of Carbon Markets Ledger. If you have any questions or need assistance, feel free to reach out to our support team at <a href="mailto:carbonmarketsledger@gmail.com">carbonmarketsledger@gmail.com</a>. Alternatively, you can visit our website at <a href="https://www.example.com" target="_blank">www.example.com</a> and chat with our helpful chatbot.</p>
+        <p>Thank you for choosing Carbon Markets Ledger!</p>
+        <p>The Carbon Markets Ledger Team.</p>
       </div>
       <div class="footer">
-        <p>&copy; ${new Date().getFullYear()} X. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Carbon Markets Ledger. All rights reserved.</p>
       </div>
     </div>
   </body>
   </html>`;
 
-  const subject = "Complete Your Email Verification for X";
+  const subject = "Complete Your Email Verification for Carbon Markets Ledger";
   const emailHeaders = {
     "Content-Type": "text/html",
     "Content-Disposition": "inline",
@@ -55,7 +55,7 @@ export const sendAccountCreationEmail = async (user, password) => {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to X. Your account has been created.</title>
+    <title>Welcome to Carbon Markets Ledger. Your account has been created.</title>
     <style>
       body { font-family: Arial, sans-serif; color: #000000; background-color: #333333; }
       p { color: black; }
@@ -69,11 +69,11 @@ export const sendAccountCreationEmail = async (user, password) => {
   <body style="background-color: #f5f5f5">
     <div class="container">
       <div class="header">
-        <h2 style="color: white; margin: 0;">X</h2>
+        <h2 style="color: white; margin: 0;">Carbon Markets Ledger</h2>
       </div>
       <div class="content" style="background-color: #ffffff">
         <p>Dear ${user.firstName},</p>
-        <p>We're excited to inform you that a X account has been created for you.
+        <p>We're excited to inform you that a Carbon Markets Ledger account has been created for you.
          With this account, you'll be able to access our services and 
         features to help enhance your experience.</p>
         <p>
@@ -93,21 +93,21 @@ export const sendAccountCreationEmail = async (user, password) => {
         </p>
         <p>
         If you need assistance or have any questions, please visit our support page or contact our support team 
-        at info@jahmike.sol</p>
+        at carbonmarketsledger@gmail.com</p>
         <p>
-        We're thrilled to have you on board and look forward to seeing you in the X community!
+        We're thrilled to have you on board and look forward to seeing you in the Carbon Markets Ledger community!
                 </p>
         <p>Best Regards, </p>
-        <p>The X Team.</p>
+        <p>The Carbon Markets Ledger Team.</p>
       </div>
       <div class="footer">
-        <p>&copy; ${new Date().getFullYear()} X. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Carbon Markets Ledger. All rights reserved.</p>
       </div>
     </div>
   </body>
   </html>`;
 
-  const subject = `Welcome to X. Your account has been created.`;
+  const subject = `Welcome to Carbon Markets Ledger. Your account has been created.`;
   const emailHeaders = {
     "Content-Type": "text/html",
     "Content-Disposition": "inline",
@@ -121,7 +121,7 @@ export const sendForgotPasswordEmail = async (user, resetUrl) => {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset for your X Account. </title>
+    <title>Password Reset for your Carbon Markets Ledger Account. </title>
     <style>
       body { font-family: Arial, sans-serif; color: #000000; background-color: #333333; }
       p { color: black; }
@@ -135,7 +135,7 @@ export const sendForgotPasswordEmail = async (user, resetUrl) => {
   <body style="background-color: #f5f5f5">
     <div class="container">
       <div class="header">
-        <h2 style="color: white; margin: 0;">X</h2>
+        <h2 style="color: white; margin: 0;">Carbon Markets Ledger</h2>
       </div>
       <div class="content" style="background-color: #ffffff">
         <p>Dear ${user.firstName},</p>
@@ -151,14 +151,14 @@ export const sendForgotPasswordEmail = async (user, resetUrl) => {
         <p><a href="${resetUrl}" target="_blank">${resetUrl}</a></p>
         <p>
         If you need assistance or have any questions, please visit our support page or contact our support team 
-        at info@jahmike.sol</p>
+        at carbonmarketsledger@gmail.com</p>
         <p>
-        Thank you for using X. We're committed to providing a secure and enjoyable experience for our users.                </p>
+        Thank you for using Carbon Markets Ledger. We're committed to providing a secure and enjoyable experience for our users.                </p>
         <p>Best Regards, </p>
-        <p>The X Team.</p>
+        <p>The Carbon Markets Ledger Team.</p>
       </div>
       <div class="footer">
-        <p>&copy; ${new Date().getFullYear()} X. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Carbon Markets Ledger. All rights reserved.</p>
       </div>
     </div>
   </body>
