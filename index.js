@@ -1,4 +1,3 @@
-import axios from "axios";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -27,13 +26,23 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(
-  cors({
-    origin: process.env.FRONTEND_BASE_URL || "http://localhost:3000",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  })
-);
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    process.env.FRONTEND_BASE_URL,
+    "http://localhost:3000",
+  ];
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use(cookieParser());
 
